@@ -1,19 +1,22 @@
 (function($, undefined){
-	test('ajax call made', function(){
+	test('ajax call made to twitter', function(){
 		//given
-		var ajaxCallMade = false;
-		$.ajax = function(){
-			ajaxCallMade = true;
+		var twitterUrl = 'http://search.twitter.com/search.json',
+			url = "";
+		$.ajax = function(args){
+			url = args.url;
 		};
 		//when
 		$('#target').twitTweet();
 		//then
-		ok(ajaxCallMade);
+		ok(url.indexOf(twitterUrl) !== -1);
 	});
 })(jQuery);
 
 $.widget("ijm.twitTweet", {
 	_create: function(){
-		$.ajax();
+		$.ajax({
+			url: 'http://search.twitter.com/search.json'
+		});
 	}
 });

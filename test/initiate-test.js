@@ -23,13 +23,26 @@
 		//then
 		equal(dataType, 'jsonp');
 	});
+
+	test('ajax call timeout is 10000', function(){
+		//given
+		var timeout;
+		$.ajax = function(args){
+			timeout = args.timeout;
+		};
+		//when	
+		$('#target').twitTweet();
+		//then
+		equal(timeout, 10000);
+	});
 })(jQuery);
 
 $.widget("ijm.twitTweet", {
 	_create: function(){
 		$.ajax({
 			url: 'http://search.twitter.com/search.json',
-			dataType: 'jsonp'
+			dataType: 'jsonp',
+			timeout: 10000
 		});
 	}
 });

@@ -11,12 +11,25 @@
 		//then
 		ok(url.indexOf(twitterUrl) !== -1);
 	});
+
+	test('ajax call data type is jsonp', function(){
+		//given
+		var dataType = "";
+		$.ajax = function(args){
+			dataType = args.dataType;
+		};
+		//when
+		$('#target').twitTweet();
+		//then
+		equal(dataType, 'jsonp');
+	});
 })(jQuery);
 
 $.widget("ijm.twitTweet", {
 	_create: function(){
 		$.ajax({
-			url: 'http://search.twitter.com/search.json'
+			url: 'http://search.twitter.com/search.json',
+			dataType: 'jsonp'
 		});
 	}
 });

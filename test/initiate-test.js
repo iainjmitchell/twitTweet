@@ -136,4 +136,15 @@
 		//then
 		ok($('#target').find('div.error').length === 1); 
 	});
+
+	test('error returned from ajax, error message added to display', function(){
+		//given
+		$.ajax = function(args){
+			args.error();
+		};
+		//when
+		$('#target').twitTweet();
+		//then
+		equal($('#target').find('div.error').text(), 'Error connecting to twitter'); 
+	});
 })(jQuery);

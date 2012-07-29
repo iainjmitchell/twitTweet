@@ -75,17 +75,37 @@
 		//then
 		ok(url.contains('?q=from:*'));
 	});
+
+	test('userName set, from:username added to url', function(){
+		//given
+		var userName = 'aUser',
+			url;
+		$.ajax = function(args){
+			url = args.url;
+		};
+		//when
+		$('#target').twitTweet({userName: userName});
+		//then
+		ok(url.contains('?q=from:'+userName))
+	});
 })(jQuery);
 
 $.widget("ijm.twitTweet", {
 	options: {
-		results: 5
+		results: 5,
+		userName: '*'
 	},
 	_create: function(){
 		$.ajax({
-			url: 'http://search.twitter.com/search.json?q=from:*&rpp=' + this.options.results,
+			url: this._buildUrl(),
 			dataType: 'jsonp',
 			timeout: 10000
 		});
+	},
+
+	_buildUrl: function(){
+		var urlParts = ['http://search.twitter.com/search.json?q=from:', this.options.userName];
+		urlParts.push('&rpp=', this.options.results);
+		return urlParts.join('');
 	}
 });

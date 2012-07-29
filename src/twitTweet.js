@@ -28,10 +28,13 @@
 				.appendTo(this.element);
 		},
 		_displayTweets: function(tweets){
-			if (tweets && tweets.length > 0){
-				$('<div>')
-					.addClass('tweet')
-					.appendTo(this.element);
+			if (tweets){
+				var contents = this.element;
+				$.each(tweets, function(){
+					$('<div>')
+						.addClass('tweet')
+						.appendTo(contents);
+				});
 			}
 		}
 	});

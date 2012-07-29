@@ -175,4 +175,22 @@
 		//then
 		ok($('#target').find('div.tweet').length === 1);
 	});
+
+	test('ajax success, multiple tweets -> added to display', function(){
+		//given
+		var tweet = {
+			from_user: 'aUser',
+			profile_image_url: 'aUrl',
+			text: 'some text',
+			created_at: 'a date'
+		}
+		var tweets = [tweet, tweet, tweet, tweet, tweet];
+		$.ajax = function(args){
+			args.success(tweets);
+		};
+		//when
+		$('#target').twitTweet();
+		//then
+		equal($('#target').find('div.tweet').length, 5);
+	});
 })(jQuery);

@@ -125,27 +125,15 @@
 		//then
 		ok(!url.contains('+OR+'));
 	});
+
+	test('error returned from ajax, error added to display', function(){
+		//given
+		$.ajax = function(args){
+			args.error();
+		};
+		//when
+		$('#target').twitTweet();
+		//then
+		ok($('#target').find('div.error').length === 1); 
+	});
 })(jQuery);
-
-$.widget("ijm.twitTweet", {
-	options: {
-		results: 5,
-		userName: '*',
-		includedMentions: true
-	},
-	_create: function(){
-		$.ajax({
-			url: this._buildUrl(),
-			dataType: 'jsonp',
-			timeout: 10000
-		});
-	},
-
-	_buildUrl: function(){
-		var urlParts = ['http://search.twitter.com/search.json?q=from:', this.options.userName];
-		if (this.options.includedMentions)
-			urlParts.push('+OR+', this.options.userName);
-		urlParts.push('&rpp=', this.options.results);
-		return urlParts.join('');
-	}
-});

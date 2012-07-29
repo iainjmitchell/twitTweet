@@ -147,4 +147,15 @@
 		//then
 		equal($('#target').find('div.error').text(), 'Error connecting to twitter'); 
 	});
+
+	test('ajax success, no tweets added', function(){
+		//given
+		$.ajax = function(args){
+			args.success();
+		};
+		//when
+		$('#target').twitTweet();
+		//then
+		ok($('#target').find('div.tweet').length === 0);
+	});
 })(jQuery);

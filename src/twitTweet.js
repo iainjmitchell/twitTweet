@@ -6,11 +6,14 @@
 			includedMentions: true
 		},
 		_create: function(){
+			var element = this.element;
 			$.ajax({
 				url: this._buildUrl(),
 				dataType: 'jsonp',
 				timeout: 10000, 
-				error: $.proxy(this._displayError, this)
+				error: $.proxy(this._displayError, this),
+				success: function(){
+				}
 			});
 		},
 		_buildUrl: function(){

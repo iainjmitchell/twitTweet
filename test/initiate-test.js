@@ -114,14 +114,14 @@
 		ok(url.contains('?q=from:' + userName + '+OR+' + userName));
 	});
 
-	test('includedMentions disabled, then url does not include OR for userName', function(){
+	test('includeMentions disabled, then url does not include OR for userName', function(){
 		//given
 		var url;
 		$.ajax = function(args){
 			url = args.url;
 		};
 		//when
-		$('#target').twitTweet({includedMentions: false})
+		$('#target').twitTweet({includeMentions: false})
 		//then
 		ok(!url.contains('+OR+'));
 	});
@@ -157,5 +157,22 @@
 		$('#target').twitTweet();
 		//then
 		ok($('#target').find('div.tweet').length === 0);
+	});
+
+	test('ajax success, one tweet added to display', function(){
+		//given
+		var tweets = [{
+			from_user: 'aUser',
+			profile_image_url: 'aUrl',
+			text: 'some text',
+			created_at: 'a date'
+		}];
+		$.ajax = function(args){
+			args.success(tweets);
+		};
+		//when
+		$('#target').twitTweet();
+		//then
+		ok($('#target').find('div.tweet').length === 1);
 	});
 })(jQuery);

@@ -88,6 +88,18 @@
 		//then
 		ok(url.contains('?q=from:'+userName))
 	});
+
+	test('userName not set & includeMentions not set, then * OR * included in url', function(){
+		//given
+		var url;
+		$.ajax = function(args){
+			url = args.url;
+		};
+		//when
+		$('#target').twitTweet();
+		//then
+		ok(url.contains('?q=from:*+OR+*'))
+	});
 })(jQuery);
 
 $.widget("ijm.twitTweet", {
@@ -105,6 +117,7 @@ $.widget("ijm.twitTweet", {
 
 	_buildUrl: function(){
 		var urlParts = ['http://search.twitter.com/search.json?q=from:', this.options.userName];
+		urlParts.push('+OR+*');
 		urlParts.push('&rpp=', this.options.results);
 		return urlParts.join('');
 	}

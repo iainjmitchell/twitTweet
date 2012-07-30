@@ -168,7 +168,7 @@
 			created_at: 'a date'
 		}];
 		$.ajax = function(args){
-			args.success(tweets);
+			args.success({results: tweets});
 		};
 		//when
 		$('#target').twitTweet();
@@ -186,7 +186,7 @@
 		}
 		var tweets = [tweet, tweet, tweet, tweet, tweet];
 		$.ajax = function(args){
-			args.success(tweets);
+				args.success({results: tweets});
 		};
 		//when
 		$('#target').twitTweet();

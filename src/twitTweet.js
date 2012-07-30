@@ -27,10 +27,10 @@
 				.append('Error connecting to twitter')
 				.appendTo(this.element);
 		},
-		_displayTweets: function(tweets){
-			if (tweets){
+		_displayTweets: function(twitterResponse){
+			if (twitterResponse){
 				var contents = this.element;
-				$.each(tweets, function(){
+				$.each(twitterResponse.results, function(){
 					$('<div>')
 						.addClass('tweet')
 						.appendTo(contents);

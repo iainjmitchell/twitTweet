@@ -183,14 +183,32 @@
 			profile_image_url: 'aUrl',
 			text: 'some text',
 			created_at: 'a date'
-		}
+		};
 		var tweets = [tweet, tweet, tweet, tweet, tweet];
 		$.ajax = function(args){
-				args.success({results: tweets});
+			args.success({results: tweets});
 		};
 		//when
 		$('#target').twitTweet();
 		//then
 		equal($('#target').find('div.tweet').length, 5);
+	});
+
+	test('ajax success, image displayed', function(){
+		//given
+		var tweet = {
+			from_user: 'aUser',
+			profile_image_url: 'aUrl',
+			text: 'some text',
+			created_at: 'a date'
+		};
+		$.ajax = function(args){
+			args.success({results: [tweet]});
+		};
+		//when
+		$('#target').twitTweet();
+		//then
+		var firstTweet = $('#target').find('div.tweet')[0];
+		equal($(firstTweet).find('.tweet-image img').attr('src'), tweet.profile_image_url);
 	});
 })(jQuery);

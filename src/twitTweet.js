@@ -29,9 +29,10 @@
 		},
 		_displayTweets: function(twitterResponse){
 			if (twitterResponse){
+				var tweetTemplate = this._getTweetTemplate();
 				var contents = this.element;
 				$.each(twitterResponse.results, function(){
-					$('<div class="tweet"><div class="tweet-image"><img/></div><div class="tweet-content"><div class="tweet-user"></div></div></div>')
+					$(tweetTemplate)
 						.find('.tweet-image img')
 							.prop('src', this.profile_image_url)
 							.prop('alt', this.from_user)
@@ -39,9 +40,19 @@
 						.find('.tweet-user')
 							.append(this.from_user)
 							.end()
+						.find('.tweet-text')
+							.append(this.text)
+							.end()
 						.appendTo(contents);
 				});
 			}
+		},
+		_getTweetTemplate: function(){
+			var tweetTemplate = ['<div class="tweet">','<div class="tweet-image"><img/></div>'];
+			tweetTemplate.push('<div class="tweet-content">','<div class="tweet-user"></div>');
+			tweetTemplate.push('<div class="tweet-text"></div>','</div>');
+			tweetTemplate.push('</div>');
+			return tweetTemplate.join('');
 		}
 	});
 })(jQuery);

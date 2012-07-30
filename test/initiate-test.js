@@ -225,4 +225,16 @@
 		var firstTweet = $('#target').find('div.tweet')[0];
 		equal($(firstTweet).find('.tweet-content .tweet-user').text(), tweet.from_user);
 	});
+
+	test('ajax success, tweet text displayed', function(){
+		//given
+		$.ajax = function(args){
+			args.success({results: [tweet]});
+		};
+		//when
+		$('#target').twitTweet();
+		//then
+		var firstTweet = $('#target').find('div.tweet')[0];
+		equal($(firstTweet).find('.tweet-content .tweet-text').text(), tweet.text);
+	});
 })(jQuery);

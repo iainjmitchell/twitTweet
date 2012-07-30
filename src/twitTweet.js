@@ -31,10 +31,14 @@
 			if (twitterResponse){
 				var contents = this.element;
 				$.each(twitterResponse.results, function(){
-					$('<div class="tweet"><div class="tweet-image"><img/></div></div>')
+					$('<div class="tweet"><div class="tweet-image"><img/></div><div class="tweet-content"><div class="tweet-user"></div></div></div>')
 						.find('.tweet-image img')
 							.prop('src', this.profile_image_url)
-						.end()
+							.prop('alt', this.from_user)
+							.end()
+						.find('.tweet-user')
+							.append(this.from_user)
+							.end()
 						.appendTo(contents);
 				});
 			}

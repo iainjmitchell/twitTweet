@@ -3,6 +3,13 @@
 		return (this.indexOf(text) !== -1);
 	};
 
+	var tweet = {
+		from_user: 'aUser',
+		profile_image_url: 'aUrl',
+		text: 'some text',
+		created_at: 'a date'
+	};
+
 	test('ajax call made to twitter', function(){
 		//given
 		var twitterUrl = 'http://search.twitter.com/search.json',
@@ -161,12 +168,7 @@
 
 	test('ajax success, one tweet added to display', function(){
 		//given
-		var tweets = [{
-			from_user: 'aUser',
-			profile_image_url: 'aUrl',
-			text: 'some text',
-			created_at: 'a date'
-		}];
+		var tweets = [tweet];
 		$.ajax = function(args){
 			args.success({results: tweets});
 		};
@@ -178,12 +180,6 @@
 
 	test('ajax success, multiple tweets -> added to display', function(){
 		//given
-		var tweet = {
-			from_user: 'aUser',
-			profile_image_url: 'aUrl',
-			text: 'some text',
-			created_at: 'a date'
-		};
 		var tweets = [tweet, tweet, tweet, tweet, tweet];
 		$.ajax = function(args){
 			args.success({results: tweets});
@@ -196,12 +192,6 @@
 
 	test('ajax success, image displayed', function(){
 		//given
-		var tweet = {
-			from_user: 'aUser',
-			profile_image_url: 'aUrl',
-			text: 'some text',
-			created_at: 'a date'
-		};
 		$.ajax = function(args){
 			args.success({results: [tweet]});
 		};
@@ -210,5 +200,29 @@
 		//then
 		var firstTweet = $('#target').find('div.tweet')[0];
 		equal($(firstTweet).find('.tweet-image img').attr('src'), tweet.profile_image_url);
+	});
+
+	test('ajax success, image alt text set', function(){
+		//given
+		$.ajax = function(args){
+			args.success({results: [tweet]});
+		};
+		//when
+		$('#target').twitTweet();
+		//then
+		var firstTweet = $('#target').find('div.tweet')[0];
+		equal($(firstTweet).find('.tweet-image img').attr('alt'), tweet.from_user);
+	});
+
+	test('ajax success, from user displayed', function(){
+		//given
+		$.ajax = function(args){
+			args.success({results: [tweet]});
+		};
+		//when
+		$('#target').twitTweet();
+		//then
+		var firstTweet = $('#target').find('div.tweet')[0];
+		equal($(firstTweet).find('.tweet-content .tweet-user').text(), tweet.from_user);
 	});
 })(jQuery);

@@ -43,6 +43,9 @@
 						.find('.tweet-text')
 							.append(this.text)
 							.end()
+						.find('.tweet-date')
+							.append(this.created_at)
+							.end()
 						.appendTo(contents);
 				});
 			}
@@ -50,8 +53,8 @@
 		_getTweetTemplate: function(){
 			var tweetTemplate = ['<div class="tweet">','<div class="tweet-image"><img/></div>'];
 			tweetTemplate.push('<div class="tweet-content">','<div class="tweet-user"></div>');
-			tweetTemplate.push('<div class="tweet-text"></div>','</div>');
-			tweetTemplate.push('</div>');
+			tweetTemplate.push('<div class="tweet-text"></div>','<div class="tweet-date"></div>');
+			tweetTemplate.push('</div>','</div>');
 			return tweetTemplate.join('');
 		}
 	});

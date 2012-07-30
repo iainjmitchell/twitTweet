@@ -237,4 +237,16 @@
 		var firstTweet = $('#target').find('div.tweet')[0];
 		equal($(firstTweet).find('.tweet-content .tweet-text').text(), tweet.text);
 	});
+
+	test('ajax success, tweet date displayed', function(){
+		//given
+		$.ajax = function(args){
+			args.success({results: [tweet]});
+		};
+		//when
+		$('#target').twitTweet();
+		//then
+		var firstTweet = $('#target').find('div.tweet')[0];
+		equal($(firstTweet).find('.tweet-content .tweet-date').text(), tweet.created_at);
+	});
 })(jQuery);

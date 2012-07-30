@@ -29,8 +29,8 @@
 		},
 		_displayTweets: function(twitterResponse){
 			if (twitterResponse){
-				var tweetTemplate = this._getTweetTemplate();
-				var contents = this.element;
+				var tweetTemplate = this._getTweetTemplate(),
+					contents = this.element;
 				$.each(twitterResponse.results, function(){
 					$(tweetTemplate)
 						.find('.tweet-image img')

@@ -60,6 +60,13 @@
 	});
 	
 	$.twitterLinkParser = function(text){
-		return text;
+		var words = text.split(' ');
+		console.log(words);
+		$.each(words, function(index){
+			if (this.indexOf('http') !== -1)
+				words[index] = '<a href="' + this + '">' + this + '</a>';
+		});
+		return words.join(' ');
+
 	}
 })(jQuery);

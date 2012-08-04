@@ -1,5 +1,5 @@
 #twitTweet
-A simple jQuery Twitter plugin.
+A simple jQuery Twitter plugin.</br>
 The git repository history also serves as an example of TDD with Javascript.
 
 #Requirements

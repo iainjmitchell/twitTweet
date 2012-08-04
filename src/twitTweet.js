@@ -41,7 +41,7 @@
 							.append(this.from_user)
 							.end()
 						.find('.tweet-text')
-							.append(this.text)
+							.append($.twitterLinkParser(this.text))
 							.end()
 						.find('.tweet-date')
 							.append(this.created_at)
@@ -59,7 +59,7 @@
 		}
 	});
 	
-	$.textToLink = function(text){
+	$.twitterLinkParser = function(text){
 		return text;
 	}
 })(jQuery);

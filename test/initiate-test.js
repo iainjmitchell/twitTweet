@@ -1,5 +1,5 @@
 (function($, undefined){
-	module('initiate-test');
+	module('twitTweet initiate');
 	String.prototype.contains = function(text){
 		return (this.indexOf(text) !== -1);
 	};

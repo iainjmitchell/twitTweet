@@ -1,4 +1,5 @@
 (function($, undefined){
+	module('initiate-test');
 	String.prototype.contains = function(text){
 		return (this.indexOf(text) !== -1);
 	};

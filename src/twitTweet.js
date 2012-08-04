@@ -58,4 +58,8 @@
 			return tweetTemplate.join('');
 		}
 	});
+	
+	$.textToLink = function(text){
+		return text;
+	}
 })(jQuery);

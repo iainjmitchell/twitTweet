@@ -16,4 +16,4 @@ $('#containerDiv').twitTweet({
 	userName: 'iainjmitchell', //twitter username - default is *
 	includeMentions: false //include other people mentioning this user - default is true
 });
-'''
+```

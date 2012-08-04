@@ -1,0 +1,19 @@
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="./style/example.css"></link>
+	</head>
+	<body>
+		<h1>twitTweet example:</h1>
+		<div id='twitterContent'></div>
+		<script src="./lib/jquery-min.js"></script>
+		<script src="./lib/jquery-ui-min.js"></script>
+  		<script src="./src/twitTweet-min.js"></script>
+  		<script>
+  			(function($, undefined){
+  				$(document).ready(function(){
+  					$('#twitterContent').twitTweet({userName: 'iainjmitchell'});
+  				});
+  			})(jQuery);
+  		</script>
+	</body>
+</html>

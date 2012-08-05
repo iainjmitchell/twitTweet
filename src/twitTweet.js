@@ -60,13 +60,29 @@
 	});
 	
 	$.twitterLinkParser = function(text){
-		var words = text.split(' ');
-		console.log(words);
-		$.each(words, function(index){
-			if (this.indexOf('http') !== -1)
-				words[index] = '<a href="' + this + '">' + this + '</a>';
-		});
-		return words.join(' ');
+		var urlRegularExpression = 
+			new RegExp("\\bhttps?://[-A-Za-z0-9+&@#/%?=~_|!:,.;]*[-A-Za-z0-9+&@#/%=~_|]");
 
+		function init(){
+			var words = text.split(' ');
+			$.each(words, function(index){
+				if (isLink(this)){
+					words[index] = convertIntoLink(this)
+				}
+			});
+			return words.join(' ');
+		}
+
+		function convertIntoLink(linkText){
+			var result = linkText.replace(urlRegularExpression, function(match){
+				return '<a href="' + match + '">' + match + '</a>'
+			});
+			return result;
+		}
+
+		function isLink(text){
+			return (text.indexOf('http') !== -1)
+		}
+		return init();
 	}
 })(jQuery);

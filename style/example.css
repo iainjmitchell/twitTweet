@@ -1,6 +1,10 @@
-#twitterContent  				{background-color: white;}
-	#twitterContent .tweet			{padding: 5px; border-bottom: 1px solid #EBEBEB;}
-	#twitterContent .tweet-image	{float: left; height: 48px; width: 48px; margin-top: 3px;}
-	#twitterContent .tweet-content 	{margin-left: 58px; min-height: 48px; }
-	#twitterContent .tweet-date    	{color: #999999; font-size: 0.8em;padding-top: 4px;}	
-	#twitterContent .tweet-text		{color: #444444;}
+body {font-family: Verdana,sans-serif; }
+#twitterContent  				{background-color: white; width: 400px;}
+.tweet			{padding: 5px; border-bottom: 1px solid #EBEBEB;}	
+.tweet-image	{float: left; height: 48px; width: 48px; margin-top: 3px;}
+.tweet-content 	{margin-left: 58px; min-height: 48px; }
+.tweet-date    	{color: #999999; font-size: 0.8em;padding-top: 4px;}	
+.tweet-text		{color: #444444;}
+.tweet-user	    {font-weight: bold;}
+.tweet-text a   {text-decoration: none;}
+.tweet-text a:hover {text-decoration: underline;};

@@ -60,4 +60,14 @@
 		equal(result, expected);
 	});
 
+	test('text contains twitter username, link to users page added', function(){
+		//given
+		var text = '@iainjmitchell hello',
+			expected = '<a href="http://www.twitter.com/iainjmitchell">@iainjmitchell</a> hello'
+		//when
+		var result = $.twitterLinkParser(text);
+		//then
+		equal(result, expected);
+	});
+
 })(jQuery);

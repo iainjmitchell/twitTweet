@@ -1,4 +1,5 @@
 (function($, undefined){
+	"use strict";
 	$.widget("ijm.twitTweet", {
 		options: {
 			results: 5,
@@ -16,8 +17,9 @@
 		},
 		_buildUrl: function(){
 			var urlParts = ['http://search.twitter.com/search.json?q=from:', this.options.userName];
-			if (this.options.includeMentions)
+			if (this.options.includeMentions){
 				urlParts.push('+OR+', this.options.userName);
+			}
 			urlParts.push('&rpp=', this.options.results);
 			return urlParts.join('');
 		},
@@ -61,28 +63,31 @@
 	
 	$.twitterLinkParser = function(text){
 		var urlRegularExpression = 
-			new RegExp("\\bhttps?://[-A-Za-z0-9+&@#/%?=~_|!:,.;]*[-A-Za-z0-9+&@#/%=~_|]");
+				new RegExp("\\bhttps?://[-A-Za-z0-9+&@#/%?=~_|!:,.;]*[-A-Za-z0-9+&@#/%=~_|]"),
+			twitterRegularExpression = 
+				new RegExp('@([A-Za-z0-9_]+)');
 
 		function init(){
 			var words = text.split(' ');
 			$.each(words, function(index){
-				if (isLink(this)){
-					words[index] = convertIntoLink(this)
-				}
+				words[index] = convertLinks(this);
 			});
 			return words.join(' ');
 		}
 
-		function convertIntoLink(linkText){
-			var result = linkText.replace(urlRegularExpression, function(match){
-				return '<a href="' + match + '">' + match + '</a>'
-			});
+		function convertLinks(linkText){
+			var result = linkText.replace(urlRegularExpression, buildUrlLink);
+			result = result.replace(twitterRegularExpression, buildTwitterLink);
 			return result;
 		}
 
-		function isLink(text){
-			return (text.indexOf('http') !== -1)
+		function buildUrlLink(url){
+			return '<a href="' + url + '">' + url + '</a>';
+		}
+
+		function buildTwitterLink(userName){
+			return '<a href="http://www.twitter.com/' + userName.substring(1, userName.length) + '">' + userName + '</a>';
 		}
 		return init();
-	}
+	};
 })(jQuery);

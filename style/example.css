@@ -1,6 +1,6 @@
 body {font-family: Verdana,sans-serif; }
-#twitterContent  				{background-color: white; width: 400px;}
-.tweet			{padding: 5px; border-bottom: 1px solid #EBEBEB;}	
+#twitterContent {background-color: white; width: 400px;}
+.tweet			{padding: 10px; border-bottom: 1px solid #EBEBEB;}	
 .tweet-image	{float: left; height: 48px; width: 48px; margin-top: 3px;}
 .tweet-content 	{margin-left: 58px; min-height: 48px; }
 .tweet-date    	{color: #999999; font-size: 0.8em;padding-top: 4px;}	
